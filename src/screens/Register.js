@@ -16,7 +16,7 @@ export default class Register extends Component {
 
   componentDidMount() {
     if (auth.currentUser !== null) {
-      this.props.navigation.navigate("HomeMenu")
+      this.props.navigation.navigate("Login")
     }
   }
 
@@ -38,9 +38,9 @@ export default class Register extends Component {
               error: "",
             })
           })
-          .catch(err => {
+          .catch(error => {
             this.setState({
-              error: err.message
+              error: error.message
             })
           })
 
@@ -68,6 +68,7 @@ export default class Register extends Component {
         <TextInput style={styles.input}
           keyboardType="password"
           placeholder="Ingrese su constraseña"
+          secureTextEntry = {true}
           onChangeText={text => this.setState({ password: text })}
           value={this.state.password} />
 
@@ -81,7 +82,7 @@ export default class Register extends Component {
           null
         }
 
-        <Text>Si ya estás registrado andá a <TouchableOpacity onPress={() => this.props.navigation.navigate("Login")}>Login</TouchableOpacity>
+        <Text> <TouchableOpacity onPress={() => this.props.navigation.navigate("Login")}>Login</TouchableOpacity>
         </Text>
 
         <StatusBar style="auto" />
