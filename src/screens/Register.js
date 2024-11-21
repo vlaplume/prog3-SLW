@@ -14,12 +14,6 @@ export default class Register extends Component {
     }
   }
 
-  componentDidMount() {
-    if (auth.currentUser !== null) {
-      this.props.navigation.navigate("Login")
-    }
-  }
-
   registrarUsuario(email, password, username) {
     if (email === "" || password === "" || username === "") {
       this.setState({
@@ -27,30 +21,33 @@ export default class Register extends Component {
       })
       return 
     }
-    auth.createUserWithEmailAndPassword(email, password)
+
+    if (password.length < 6) {
+      this.setState({
+        error: "La contraseña debe tener al menos 6 caracteres."
+      })
+      return
+    }
+
+    auth.createUserWithEmailAndPassword(email, password) // Cuando se crea el usuario se inicia sesión automáticamente (por defecto) 
       .then(res => {
         db.collection("users").add({ Owner: email, Username: username, })
           .then(() => {
-            this.setState({
-              email: "",
-              password: "",
-              username: "",
-              error: "",
-            })
+            auth.signOut();
+            this.props.navigation.navigate("Login");
           })
           .catch(error => {
             this.setState({
               error: error.message
             })
           })
-
       })
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.heading}> Formulario de Registro</Text>
+        <Text style={styles.heading}>Formulario de Registro</Text>
 
         <TextInput style={styles.input}
           keyboardType='default'
