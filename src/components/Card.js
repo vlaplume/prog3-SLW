@@ -9,31 +9,39 @@ class Card extends Component {
         super(props);
         this.state = {
             liked: false,
+            contador: this.props.post.likes.length
         }
     }
 
     componentDidMount() {
-        // string que tiene que estar dentro del array de likes para considerar que likeo el posteo
-        // array
-        this.props.post.likes.map(like => {
-            if (like === auth.currentUser.email) {
-                this.setState({ liked: true })
-            }
-        })
+        if(this.props.post.likes.includes(auth.currentUser.email)){
+            this.setState({
+                like: true
+            })
+        }
     }
 
     likear() {
-        this.setState({ liked: !this.state.liked })
+        db.collection('post').doc(this.props.post.id).update({
+            likes: firebase.firestore.FieldValue.arrayUnion(this.props.post.owner)
+        })
+            .then(() => this.setState({
+                like: true,
+                contador: this.props.post.likes.length
+
+            }))
+    }
+
+    dislikear() {
 
         db.collection("post").doc(this.props.post.id).update({
-            likes : this.state.liked ? firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email) : firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+            likes: firebase.firestore.FieldValue.arrayRemove(this.props.post.owner)
         })
-            .then(() => {
-                console.log("Listo")
-            })
-            .catch(err => {
-                console.log(err)
-            })
+            .then(() => this.setState({
+                like: false,
+                contador: this.props.post.likes.length
+
+            }))
     }
 
     // Convertir a timestamp
@@ -48,16 +56,19 @@ class Card extends Component {
     }
 
     render() {
-        return(
+        return (
             <View>
                 <Text>{this.props.post.title}</Text>
                 <Text>{this.props.post.description}</Text>
                 <Text>{this.props.post.owner}</Text>
-                <Text>{this.props.post.likes.length} likes</Text>
                 <Text>{this.convertirAFecha(this.props.post.createdAt.seconds)}</Text>
-                <TouchableOpacity onPress={() => this.likear()}>
-                    <Text>{this.state.liked ? "Dislike" : "Like"}</Text>
-                </TouchableOpacity>
+                {this.state.like ? <TouchableOpacity onPress={() => this.dislikear()}>
+                    <Text>Dislike</Text>
+                </TouchableOpacity> : <TouchableOpacity onPress={() => this.likear()}>
+                    <Text>Like</Text>
+                </TouchableOpacity>}
+                <Text>Cantidad de likes: {this.state.contador}</Text>
+
             </View>
         )
     }
