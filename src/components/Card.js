@@ -25,7 +25,7 @@ class Card extends Component {
     likear() {
         this.setState({ liked: !this.state.liked })
 
-        db.collection("post").doc(this.props.post.id.toLocaleString()).update({
+        db.collection("post").doc(this.props.post.id).update({
             likes : this.state.liked ? firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email) : firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
             .then(() => {
@@ -34,12 +34,6 @@ class Card extends Component {
             .catch(err => {
                 console.log(err)
             })
-
-        // db.collection("posts").where("id", "==", this.props.post.id).onSnapshot(snapshot => {
-        //    snapshot.forEach(doc => {
-        //     console.log(doc.data())
-        //    })
-        // });
     }
 
     // Convertir a timestamp

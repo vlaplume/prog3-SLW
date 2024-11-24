@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import Card from '../components/Card';
 
 import { db } from '../firebase/config';
@@ -16,7 +16,10 @@ class Home extends Component {
     db.collection("posts").onSnapshot(snapshot => { // SELECT * FROM posts;
       const posts = []
       snapshot.forEach(doc => {
-        posts.push(doc.data())
+        posts.push({
+          id: doc.id,
+          data: doc.data()
+        })
       })
       this.setState({ posts: posts })
     })
@@ -34,7 +37,7 @@ class Home extends Component {
               <Text>No hay posts</Text> :
               <FlatList
                 data={this.state.posts}
-                renderItem={({ item }) => <Card post={item} />}
+                renderItem={({ item }) => <Card id={item.id} post={item.data} />}
                 keyExtractor={item => item.id}
               />
             }
