@@ -67,15 +67,15 @@ export default class Register extends Component {
 
       <View style={styles.container}>
         <Image
-        source={require("../../assets/FotoPostIt.png")} 
-        style={styles.imagenRegistro} 
-        /> 
+          source={require("../../assets/FotoPostIt.png")}
+          style={styles.imagenRegistro}
+        />
 
         <Text style={styles.heading}> Registrate! </Text>
 
         <TextInput style={styles.input}
           keyboardType='default'
-          placeholder='Ingrse su nombre de usuario'
+          placeholder='Ingrese su nombre de usuario'
           onChangeText={text => this.setState({ username: text })}
           value={this.state.username} />
         <Text> {this.state.errorUsername}</Text>
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 10,
   },
-  imagenRegistro:{
+  imagenRegistro: {
     height: 200,
     width: 250,
   }

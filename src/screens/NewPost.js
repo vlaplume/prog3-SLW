@@ -1,4 +1,3 @@
-// Formulario de creación del posteo
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { auth, db } from '../firebase/config';
@@ -16,9 +15,9 @@ class NewPost extends Component {
     createPost(title, description) {
         if (title === "" || description === "") {
             this.setState({
-              error : "Debe completar todos los campos del registro."
+                error: "Debe completar todos los campos requeridos"
             })
-            return 
+            return
         }
 
         let cantidadPosteos;
@@ -49,9 +48,9 @@ class NewPost extends Component {
             })
             .catch(err => {
                 this.setState({
-                    title : "",
-                    description : "",
-                    error : "Ocurrió un error"
+                    title: "",
+                    description: "",
+                    error: "Ocurrió un error"
                 })
             })
     }
@@ -64,24 +63,24 @@ class NewPost extends Component {
                 <Text style={styles.label}>Título</Text>
                 <TextInput style={styles.input}
                     keyboardType='default'
-                    placeholder='Ingrse el título del posteo'
+                    placeholder='Ingrese el título del posteo'
                     onChangeText={text => this.setState({ title: text })}
                     value={this.state.title} />
 
-                <Text style={styles.label}>Description</Text>
+                <Text style={styles.label}>Descripción</Text>
                 <TextInput style={styles.input}
                     keyboardType='default'
-                    placeholder='Ingrse la descripción del posteo'
+                    placeholder='Ingrese la descripción del posteo'
                     onChangeText={text => this.setState({ description: text })}
                     value={this.state.description} />
 
-                <TouchableOpacity style={styles.button} onPress={() => {this.createPost(this.state.title, this.state.description)}}>
+                <TouchableOpacity style={styles.button} onPress={() => { this.createPost(this.state.title, this.state.description) }}>
                     Agregar posteo
                 </TouchableOpacity>
 
                 <Text style={styles.error}>{this.state.error}</Text>
-               
-            
+
+
             </View>
         )
     }
@@ -99,18 +98,18 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#6A1B9A', 
+        color: '#6A1B9A',
         marginBottom: 20,
         textAlign: 'center',
     },
     label: {
         fontSize: 18,
-        color: '#6A1B9A', 
+        color: '#6A1B9A',
         marginBottom: 5,
     },
     input: {
         height: 40,
-        borderColor: '#6A1B9A', 
+        borderColor: '#6A1B9A',
         borderWidth: 1,
         borderRadius: 5,
         paddingLeft: 10,
@@ -121,9 +120,10 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         alignItems: 'center',
+        fontWeight: 'bold',
     },
     buttonText: {
-        color: '#FFFFFF', 
+        color: '#FFFFFF',
         fontSize: 16,
     },
     error: {

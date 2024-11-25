@@ -46,9 +46,9 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <Image
-        source={require("../../assets/FotoPostIt.png")} 
-        style={styles.imagenLogin} 
-        /> 
+          source={require("../../assets/FotoPostIt.png")}
+          style={styles.imagenLogin}
+        />
         <Text style={styles.heading}> Logueate! </Text>
 
         <TextInput
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 20,
-    color:'#6A1B9A'
+    color: '#6A1B9A'
   },
   input: {
     width: '100%',
@@ -111,9 +111,9 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     marginBottom: 10,
     borderRadius: 5,
- 
+
   },
-  
+
   button: {
     backgroundColor: "#6A1B9A",
     padding: 10,
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 10,
   },
-  imagenLogin:{
+  imagenLogin: {
     height: 200,
     width: 250,
   },

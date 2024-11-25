@@ -23,18 +23,18 @@ export default class App extends Component {
       this.setState({ logueado: user ? true : false });
     });
   }
-  
+
   render() {
     return (
       <NavigationContainer>
         <Stack.Navigator>
           {
             this.state.logueado === false ?
-            <Stack.Group>
-              <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-              <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
-            </Stack.Group> :
-            <Stack.Screen name="HomeMenu" component={HomeMenu} options={{ headerShown: false }} />
+              <Stack.Group>
+                <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+                <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
+              </Stack.Group> :
+              <Stack.Screen name="HomeMenu" component={HomeMenu} options={{ headerShown: false }} />
           }
         </Stack.Navigator>
       </NavigationContainer>

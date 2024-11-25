@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from "react-native";
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { auth, db } from "../firebase/config";
 import Card from "../components/Card";
 
@@ -21,7 +14,7 @@ export default class Profile extends Component {
     };
   }
 
-  
+
 
   componentDidMount() {
     console.log("test");
@@ -58,10 +51,10 @@ export default class Profile extends Component {
         />
 
         <Text style={styles.username}>
-        nombre de usuario: {this.state.username ? this.state.username.Username : "Cargando..."}
+          nombre de usuario: {this.state.username ? this.state.username.Username : "Cargando..."}
         </Text>
         <Text style={styles.email}>email:  {this.state.email}</Text>
-        <Text style={styles.posts}>cantidad de posts: {this.state.posteos.length}</Text>
+        <Text style={styles.posts}>cantidad de posteos: {this.state.posteos.length}</Text>
 
         <TouchableOpacity
           style={styles.logoutButton}
@@ -85,7 +78,7 @@ export default class Profile extends Component {
                 keyExtractor={(item) => item.id}
               />
             )}
-           
+
           </View>
         )}
       </View>
@@ -153,13 +146,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
   },
-  scroll : {
+  scroll: {
     flex: 1,
   },
-posts:{
-  fontSize: 18,
+  posts: {
+    fontSize: 18,
     color: "black",
     paddingTop: 10,
     marginTop: 5,
-}
+  }
 });

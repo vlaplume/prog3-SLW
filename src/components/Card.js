@@ -23,9 +23,9 @@ class Card extends Component {
 
     borrarPosteo(id) {
         db.collection("posts")
-          .doc(id)
-          .delete()
-      }
+            .doc(id)
+            .delete()
+    }
 
     likear() {
 
@@ -87,12 +87,12 @@ class Card extends Component {
 
 
 
-            {auth.currentUser.email === this.props.post.owner ?   <TouchableOpacity
-              onPress={() => this.borrarPosteo(this.props.id)}
-            >
-              <Text style={styles.borrar}> Borrar posteo </Text>
-            </TouchableOpacity> : null }
-           
+                    {auth.currentUser.email === this.props.post.owner ? <TouchableOpacity
+                        onPress={() => this.borrarPosteo(this.props.id)}
+                    >
+                        <Text style={styles.borrar}> Borrar posteo </Text>
+                    </TouchableOpacity> : null}
+
                     <Text style={styles.likesCount} >Cantidad de likes: {this.state.contador}</Text>
 
                 </View>
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#333',
     },
-    borrar:{
+    borrar: {
         backgroundColor: '#9370DB',
         padding: 5,
         borderRadius: 5,
