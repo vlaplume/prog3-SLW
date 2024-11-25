@@ -10,46 +10,65 @@ export default class Register extends Component {
       email: "",
       password: "",
       username: "",
-      error: "",
+      errorMsg: "",
+      errorEmail: "",
+      errorUsername: "",
+      errorPassword: "",
     }
   }
 
   registrarUsuario(email, password, username) {
-    if (email === "" || password === "" || username === "") {
+    if (email === "") {
       this.setState({
-        error : "Debe completar todos los campos del registro."
+        errorEmail: "Debe completar el email."
       })
-      return 
+    } else {
+      this.setState({ errorEmail: "" })
     }
 
-    if (password.length < 6) {
+    if (username === "") {
       this.setState({
-        error: "La contraseña debe tener al menos 6 caracteres."
+        errorUsername: "Debe completar el nombre de usuario."
       })
-      return
+    } else {
+      this.setState({ errorUsername: "" })
     }
 
-    auth.createUserWithEmailAndPassword(email, password) // Cuando se crea el usuario se inicia sesión automáticamente (por defecto) 
+    if (password === "") {
+      this.setState({
+        errorPassword: "Debe completar la contraseña."
+      })
+    } else {
+      this.setState({ errorPassword: "" })
+    }
+
+    auth.createUserWithEmailAndPassword(email, password)
       .then(res => {
         db.collection("users").add({ Owner: email, Username: username, })
           .then(() => {
             auth.signOut();
             this.props.navigation.navigate("Login");
           })
-          .catch((error) => {
-            console.log(error)
-            this.setState({
-              error: error.message
-            })
-          })
+
+      }).catch((error) => {
+        this.setState({
+          errorMsg: error.message
+        })
       })
   }
+
+
+
+
+
 
   render() {
     return (
 
       <View style={styles.container}>
-        
+
+
+
         <Text style={styles.heading}> Registrate! </Text>
 
         <TextInput style={styles.input}
@@ -57,30 +76,36 @@ export default class Register extends Component {
           placeholder='Ingrse su nombre de usuario'
           onChangeText={text => this.setState({ username: text })}
           value={this.state.username} />
-
+        <Text> {this.state.errorUsername}</Text>
 
         <TextInput style={styles.input}
           keyboardType="email-address"
           placeholder="Ingrese su email"
           onChangeText={text => this.setState({ email: text })}
           value={this.state.email} />
+        <Text> {this.state.errorEmail}</Text>
+
 
         <TextInput style={styles.input}
           keyboardType="password"
           placeholder="Ingrese su constraseña"
-          secureTextEntry = {true}
+          secureTextEntry={true}
           onChangeText={text => this.setState({ password: text })}
           value={this.state.password} />
+        <Text> {this.state.errorPassword}</Text>
 
-        <TouchableOpacity  style={styles.button} onPress={() => this.registrarUsuario(this.state.email, this.state.password, this.state.username)}>
-        <Text>Registrarse</Text>
+
+
+
+        <TouchableOpacity style={styles.button} onPress={() => this.registrarUsuario(this.state.email, this.state.password, this.state.username)}>
+          <Text>Registrarse</Text>
         </TouchableOpacity>
 
-        {
-          this.state.error ?
-          <Text style={styles.error}>{this.state.error}</Text> :
-          null
-        }
+        <Text style={styles.error}>{this.state.errorMsg}</Text>
+
+
+
+
 
         <Text> <TouchableOpacity onPress={() => this.props.navigation.navigate("Login")} style={styles.button}>Tengo cuenta</TouchableOpacity>
         </Text>
@@ -103,7 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 20,
-    color:'#6A1B9A',
+    color: '#6A1B9A',
   },
   input: {
     width: '100%',
@@ -121,7 +146,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: 200,
   },
-  
+
   buttonText: {
     color: '#fff',
     textAlign: 'center',
