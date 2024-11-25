@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 import { auth, db } from "../firebase/config";
 import firebase from "firebase";
@@ -57,6 +57,7 @@ class Card extends Component {
 
     render() {
         return (
+            <ScrollView>
             <View style={styles.card}>
                 <Text style={styles.title}>{this.props.post.title}</Text>
                 <Text style={styles.description}>{this.props.post.description}</Text>
@@ -70,6 +71,7 @@ class Card extends Component {
                 <Text style={styles.likesCount} >Cantidad de likes: {this.state.contador}</Text>
 
             </View>
+            </ScrollView>
         )
     }
 };
@@ -78,14 +80,16 @@ export default Card;
 
 const styles = StyleSheet.create({
     card: {
+        flex: 1,
         backgroundColor: '#E6E6FA',
         borderRadius: 10,
-        padding: 15,
+        padding: 20,
         marginVertical: 10,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
             height: 2,
+        
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
