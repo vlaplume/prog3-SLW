@@ -13,7 +13,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    db.collection("posts").onSnapshot(snapshot => { // SELECT * FROM posts;
+    db.collection("posts").onSnapshot(snapshot => {
       const posts = []
       snapshot.forEach(doc => {
         posts.push({
@@ -30,18 +30,18 @@ class Home extends Component {
       <View style={styles.container}>
         {
           this.state.posts === null ?
-          <Text style={styles.loadingText}>Cargando...</Text> : 
-          <View>
-            { 
-              this.state.posts.length === 0 ?
-              <Text style={styles.noPostsText}>No hay posts</Text> :
-              <FlatList
-                data={this.state.posts}
-                renderItem={({ item }) => <Card id={item.id} post={item.data} />}
-                keyExtractor={item => item.id}
-              />
-            }
-          </View>
+            <Text style={styles.loadingText}>Cargando...</Text> :
+            <View style={styles.scroll}>
+              {
+                this.state.posts.length === 0 ?
+                  <Text style={styles.noPostsText}>No hay posts</Text> :
+                  <FlatList
+                    data={this.state.posts}
+                    renderItem={({ item }) => <Card id={item.id} post={item.data} />}
+                    keyExtractor={item => item.id}
+                  />
+              }
+            </View>
         }
       </View>
     )
@@ -57,16 +57,19 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   loadingText: {
-    color: '#6A1B9A', 
+    color: '#6A1B9A',
     fontSize: 18,
     textAlign: 'center',
     marginTop: 20,
   },
   noPostsText: {
-    color: '#6A1B9A', 
+    color: '#6A1B9A',
     fontSize: 18,
     textAlign: 'center',
     marginTop: 20,
   },
+  scroll: {
+    flex: 1,
+  }
 });
 
