@@ -36,7 +36,8 @@ export default class Register extends Component {
             auth.signOut();
             this.props.navigation.navigate("Login");
           })
-          .catch(error => {
+          .catch((error) => {
+            console.log(error)
             this.setState({
               error: error.message
             })
@@ -46,8 +47,10 @@ export default class Register extends Component {
 
   render() {
     return (
+
       <View style={styles.container}>
-        <Text style={styles.heading}>Formulario de Registro</Text>
+        
+        <Text style={styles.heading}> Registrate! </Text>
 
         <TextInput style={styles.input}
           keyboardType='default'
@@ -79,7 +82,7 @@ export default class Register extends Component {
           null
         }
 
-        <Text> <TouchableOpacity onPress={() => this.props.navigation.navigate("Login")} style={styles.button}>Login</TouchableOpacity>
+        <Text> <TouchableOpacity onPress={() => this.props.navigation.navigate("Login")} style={styles.button}>Tengo cuenta</TouchableOpacity>
         </Text>
 
         <StatusBar style="auto" />
@@ -106,6 +109,7 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     borderWidth: 1,
+    width: 300,
     borderColor: '#ccc',
     marginBottom: 10,
     borderRadius: 5,
@@ -115,7 +119,9 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
+    width: 200,
   },
+  
   buttonText: {
     color: '#fff',
     textAlign: 'center',

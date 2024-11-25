@@ -21,6 +21,12 @@ class Card extends Component {
         }
     }
 
+    borrarPosteo(id) {
+        db.collection("posts")
+          .doc(id)
+          .delete()
+      }
+
     likear() {
 
         console.log(this.props.post.likes.length)
@@ -74,10 +80,19 @@ class Card extends Component {
                     <Text style={styles.owner}>{this.props.post.owner}</Text>
                     <Text style={styles.date}>{this.convertirAFecha(this.props.post.createdAt.seconds)}</Text>
                     {this.state.liked ? <TouchableOpacity style={styles.button} onPress={() => this.dislikear()}>
-                        <Text>Dislike</Text>
+                        <Text>Me gusta</Text>
                     </TouchableOpacity> : <TouchableOpacity style={styles.button} onPress={() => this.likear()}>
                         <Text>Me gusta</Text>
                     </TouchableOpacity>}
+
+
+
+            {auth.currentUser.email === this.props.post.owner ?   <TouchableOpacity
+              onPress={() => this.borrarPosteo(this.props.id)}
+            >
+              <Text> Borrar posteo </Text>
+            </TouchableOpacity> : null }
+           
                     <Text style={styles.likesCount} >Cantidad de likes: {this.state.contador}</Text>
 
                 </View>

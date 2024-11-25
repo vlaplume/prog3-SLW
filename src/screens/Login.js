@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, StyleSheet, Image } from 'react-native';
 import { auth } from "../firebase/config";
 
 class Login extends Component {
@@ -45,7 +45,11 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.heading}>Formulario de Login</Text>
+        <Image
+        source={require("../../assets/FotoPostIt.png")} 
+        style={styles.imagenLogin} 
+        /> 
+        <Text style={styles.heading}> Logueate! </Text>
 
         <TextInput
           style={styles.input}
@@ -78,7 +82,7 @@ class Login extends Component {
           onPress={() => this.props.navigation.navigate("Register")}
           style={styles.button}
         >
-          <Text>Registro</Text>
+          <Text>No tengo cuenta</Text>
         </TouchableOpacity>
       </View>
     );
@@ -103,16 +107,19 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     borderWidth: 1,
+    width: 300,
     borderColor: '#ccc',
     marginBottom: 10,
     borderRadius: 5,
  
   },
+  
   button: {
     backgroundColor: '#6200EA',
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
+    width: 200,
   },
   buttonText: {
     color: '#fff',
