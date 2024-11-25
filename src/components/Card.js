@@ -90,7 +90,7 @@ class Card extends Component {
             {auth.currentUser.email === this.props.post.owner ?   <TouchableOpacity
               onPress={() => this.borrarPosteo(this.props.id)}
             >
-              <Text> Borrar posteo </Text>
+              <Text style={styles.borrar}> Borrar posteo </Text>
             </TouchableOpacity> : null }
            
                     <Text style={styles.likesCount} >Cantidad de likes: {this.state.contador}</Text>
@@ -155,4 +155,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#333',
     },
+    borrar:{
+        backgroundColor: '#9370DB',
+        padding: 5,
+        borderRadius: 5,
+        alignItems: 'center',
+        marginBottom: 10,
+    }
 });

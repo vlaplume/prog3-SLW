@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, StyleSheet, Image } from 'react-native';
 import { auth, db } from "../firebase/config";
 
 export default class Register extends Component {
@@ -66,8 +66,10 @@ export default class Register extends Component {
     return (
 
       <View style={styles.container}>
-
-
+        <Image
+        source={require("../../assets/FotoPostIt.png")} 
+        style={styles.imagenRegistro} 
+        /> 
 
         <Text style={styles.heading}> Registrate! </Text>
 
@@ -140,7 +142,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   button: {
-    backgroundColor: '#6200EA',
+    backgroundColor: '#6A1B9A',
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
@@ -155,4 +157,8 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 10,
   },
+  imagenRegistro:{
+    height: 200,
+    width: 250,
+  }
 });

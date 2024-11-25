@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   
   button: {
-    backgroundColor: '#6200EA',
+    backgroundColor: "#6A1B9A",
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
@@ -128,6 +128,10 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
     marginBottom: 10,
+  },
+  imagenLogin:{
+    height: 200,
+    width: 250,
   },
 });
 

@@ -58,10 +58,10 @@ export default class Profile extends Component {
         />
 
         <Text style={styles.username}>
-          {this.state.username ? this.state.username.Username : "Cargando..."}
+        nombre de usuario: {this.state.username ? this.state.username.Username : "Cargando..."}
         </Text>
-        <Text style={styles.email}> {this.state.email}</Text>
-        <Text>cantidad: {this.state.posteos.length}</Text>
+        <Text style={styles.email}>email:  {this.state.email}</Text>
+        <Text style={styles.posts}>cantidad de posts: {this.state.posteos.length}</Text>
 
         <TouchableOpacity
           style={styles.logoutButton}
@@ -75,7 +75,7 @@ export default class Profile extends Component {
         ) : (
           <View style={styles.scroll}>
             {this.state.posteos.length === 0 ? (
-              <Text style={styles.noPostText}>No hay posteos</Text>
+              <Text style={styles.noPostText}>No hay ningun posteo!</Text>
             ) : (
               <FlatList
                 data={this.state.posteos}
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: "center",
     marginTop: 20,
+    color: "#603b74",
   },
   logoutButton: {
     marginTop: 20,
@@ -138,22 +139,27 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   username: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 18,
     color: "black",
   },
   email: {
-    fontSize: 16,
+    fontSize: 18,
     color: "black",
+    paddingTop: 10,
     marginTop: 5,
   },
   ButtonText: {
     color: "black",
-    font: "bold",
+    fontWeight: "bold",
     fontSize: 18,
   },
   scroll : {
     flex: 1,
-  }
-
+  },
+posts:{
+  fontSize: 18,
+    color: "black",
+    paddingTop: 10,
+    marginTop: 5,
+}
 });
