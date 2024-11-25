@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, FlatList } from 'react-native';
+import { View, Text, TextInput, FlatList, StyleSheet } from 'react-native';
+import { auth, db } from "../firebase/config";
 
 class Search extends Component {
     constructor(props) {
@@ -40,25 +41,26 @@ class Search extends Component {
       }
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <Text>Buscar por usuario</Text>
         <TextInput
-          style=''
+        style={styles.input}
+       
           keyboardType='default'
           placeholder='Ingrse el nombre de usuario'
           onChangeText={text => this.setState({ username: text })}
           value={this.state.username}
         />
-        <Text>Resultados de búsqueda</Text>
+        <Text style={styles.resultsHeader}>Resultados de búsqueda</Text>
         {
           this.state.username !== '' ?
             this.state.users === null ?
-              <Text>Cargando...</Text> :
+              <Text style={styles.loadingText}>Cargando...</Text> :
               this.state.users.length === 0 ?
-                <Text>No hay usuarios</Text> :
+                <Text style={styles.noResultsText}>No hay usuarios</Text> :
                 <FlatList
                   data={this.state.users}
-                  renderItem={({ item }) => <Text>{item.data().Username}</Text>}
+                  renderItem={({ item }) => <Text style={styles.userItem}>{item.data().Username}</Text>}
                   keyExtractor={item => item.id}
                 />
             : null
@@ -69,3 +71,47 @@ class Search extends Component {
 }
 
 export default Search;
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: "#E6E6FA", 
+    },
+    header: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#6A1B9A', 
+        marginBottom: 20,
+    },
+    input: {
+        height: 40,
+        borderColor: '#6200EA', 
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        marginBottom: 20,
+    },
+    resultsHeader: {
+        fontSize:18,
+        fontWeight: 'bold',
+        color: '#333',
+        marginBottom: 10,
+    },
+    loadingText: {
+        fontSize: 16,
+        color: '#333',
+    },
+    noResultsText: {
+        fontSize: 16,
+        color: '#666',
+        textAlign: 'center',
+        marginTop: 20,
+    },
+    userItem: {
+        fontSize: 16,
+        color: '#6A1B9A', 
+        paddingVertical: 10,
+    },
+});

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import Card from '../components/Card';
 
 import { db } from '../firebase/config';
@@ -27,14 +27,14 @@ class Home extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         {
           this.state.posts === null ?
-          <Text>Cargando...</Text> : 
+          <Text style={styles.loadingText}>Cargando...</Text> : 
           <View>
             { 
               this.state.posts.length === 0 ?
-              <Text>No hay posts</Text> :
+              <Text style={styles.noPostsText}>No hay posts</Text> :
               <FlatList
                 data={this.state.posts}
                 renderItem={({ item }) => <Card id={item.id} post={item.data} />}
@@ -49,3 +49,24 @@ class Home extends Component {
 }
 
 export default Home;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#E6E6FA',
+    padding: 16,
+  },
+  loadingText: {
+    color: '#6A1B9A', 
+    fontSize: 18,
+    textAlign: 'center',
+    marginTop: 20,
+  },
+  noPostsText: {
+    color: '#6A1B9A', 
+    fontSize: 18,
+    textAlign: 'center',
+    marginTop: 20,
+  },
+});
+

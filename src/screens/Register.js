@@ -69,8 +69,8 @@ export default class Register extends Component {
           onChangeText={text => this.setState({ password: text })}
           value={this.state.password} />
 
-        <TouchableOpacity onPress={() => this.registrarUsuario(this.state.email, this.state.password, this.state.username)}>
-          <Text>Registrarse</Text>
+        <TouchableOpacity  style={styles.button} onPress={() => this.registrarUsuario(this.state.email, this.state.password, this.state.username)}>
+        <Text>Registrarse</Text>
         </TouchableOpacity>
 
         {
@@ -79,7 +79,7 @@ export default class Register extends Component {
           null
         }
 
-        <Text> <TouchableOpacity onPress={() => this.props.navigation.navigate("Login")}>Login</TouchableOpacity>
+        <Text> <TouchableOpacity onPress={() => this.props.navigation.navigate("Login")} style={styles.button}>Login</TouchableOpacity>
         </Text>
 
         <StatusBar style="auto" />
@@ -91,18 +91,37 @@ export default class Register extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: "#E6E6FA",
   },
   heading: {
-
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color:'#6A1B9A',
   },
   input: {
-    border: "1px solid #000000",
-    borderRadius : "8pt"
+    width: '100%',
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+  button: {
+    backgroundColor: '#6200EA',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
   },
   error: {
-    color: "rgb(255,0,0)",
-  }
+    color: 'red',
+    marginBottom: 10,
+  },
 });

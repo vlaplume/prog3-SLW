@@ -91,11 +91,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    backgroundColor: "#E6E6FA",
   },
   heading: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 20,
+    color:'#6A1B9A'
   },
   input: {
     width: '100%',
@@ -104,9 +106,10 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     marginBottom: 10,
     borderRadius: 5,
+ 
   },
   button: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#6200EA',
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
